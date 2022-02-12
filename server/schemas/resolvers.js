@@ -51,5 +51,20 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    login: async (parent, { username, password }) => {
+        const user = await User.findOne({ username });
+  
+        if (!user) {
+          throw new AuthenticationError("Invalid credentials");
+        }
+  
+        const correctPassword = await user.isCorrectPassword(password);
+        if (!correctPassword) {
+          throw new AuthenticationError("Invalid credentials");
+        }
+        const token = signToken(user);
+  
+        return { token, user };
+      },
   },
 };
