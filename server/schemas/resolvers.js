@@ -19,32 +19,8 @@ const resolvers = {
     },
   },
   Mutation: {
-    createUser: async (parent, { userInput }) => {
-      let { username, email, password, confirmPassword } = userInput;
-
-      // Use validators to ensure user input meets criteria
-      const { valid, errors } = validateUserInput(
-        username,
-        email,
-        password,
-        confirmPassword
-      );
-
-      if (!valid) {
-        throw new UserInputError("Validation errors", { errors });
-      }
-
-      // Allows for app to be used in social network context in the future
-      let user = await User.findOne({ username });
-      if (user) {
-        throw new UserInputError("Username already exists", {
-          errors: {
-            username: "This username is taken",
-          },
-        });
-      }
-
-      user = await User.create(userInput);
+    createUser: async (parent, args) => {
+      const user = await User.create(args);
       const token = signToken(user);
       return { token, user };
     },
