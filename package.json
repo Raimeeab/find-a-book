@@ -1,7 +1,7 @@
 {
   "name": "googlebooks-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Using Google Books API & MERN stack, this app allows users to search for books and save & delete books from their reading list.",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
@@ -10,7 +10,7 @@
     "build": "cd client && npm run build"
   },
   "keywords": [],
-  "author": "",
+  "author": "Raimee Abbassi | Trilogy",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"

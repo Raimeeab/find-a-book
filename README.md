@@ -23,7 +23,7 @@ Modern websites are driven by two things: data & user demands. This application 
 
 Link to the [app]().
 
-![app-demo](
+![app-demo](assets/demo.gif)
 
 <a name="technologies"></a>
 
@@ -48,7 +48,7 @@ Link to the [app]().
 
 1. Git clone this repository onto your local machine and navigate to the file on your terminal. _This can also be done by opening the file on Visual Studios and running it through the intergated terminal._
 
-![git-clone]()
+![git-clone](assets/git-clone.gif)
 
 2. Set up an env file with with a JWT secret token in the server folder. 
 
@@ -56,19 +56,16 @@ Link to the [app]().
 
 3. Set up your mongoDB locally - [how to guide](https://docs.mongodb.com/guides/server/install/)
 
-4. In the root directory, run `npm install` & `npm run seed` to download all the required dependencies and seeds.
+4. In the root directory, run `npm install` to download all the required dependencies.
 
-![install](./client/src/assets//demos/git-install.gif)
+![install](assets/install.gif)
 
 5. To start the application, run:
 
    - `npm run develop`
 
-![start](/client/src/assets/demos/start.gif)
+![start](assets/start.gif)
 
-6. To test mutations head to `http://localhost:3001/graphql//`
-
-![graphql-demo](/client/src/assets/demos/gql-demo.gif)
 
 <a name="usage"></a>
 
@@ -88,7 +85,7 @@ _The Univserity of Sydney | Trilogy Education Services_ <br>
 ## 🔖 License
 
 MIT License
-Copyright (c) [2021] [PlanIT]
+Copyright (c) [2021] [Find A Book]
 Permission is herby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limiation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject following coditions:
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 

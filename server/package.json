@@ -1,14 +1,14 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Using Google Books API & MERN stack, this app allows users to search for books and save & delete books from their reading list.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "watch": "nodemon server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Raimee Abbasssi | Trilogy",
   "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^3.6.3",

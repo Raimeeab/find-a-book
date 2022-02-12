@@ -32,7 +32,7 @@ const SavedBooks = () => {
       return false;
     }
     try {
-      const { data } = await removeBook({
+      await removeBook({
         variables: { bookId: bookId },
       });
       console.log("reachingn variable", bookId);
