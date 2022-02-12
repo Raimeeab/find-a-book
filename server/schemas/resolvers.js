@@ -54,7 +54,8 @@ const resolvers = {
           }
         );
         return addBook;
-      }
+      }; 
+      console.log("checking token", context.user); 
       throw new AuthenticationError("You must be logged in to save books.");
     },
     deleteBook: async (parent, bookId, context) => {
