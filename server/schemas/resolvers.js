@@ -7,18 +7,15 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    getUser: async (parent, { username, password }) => {
-      const user = await User.findOne({ username });
-      const correctPw = await user.isCorrectPassword(password);
-
-      // If email or password is incorrect, throw the same error
-      if (!user || !correctPw) {
-        throw new AuthenticationError("Incorrect login credentials");
+    me: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );
+        return userData;
       }
-
-      // When user is successfully logged in:
-      const token = signToken(user);
-      return { token, user };
+      // LAST PIECE OF THE PUZZLE
+      throw new AuthenticationError("You need to be logged in!");
     },
   },
   Mutation: {
@@ -35,7 +32,7 @@ const resolvers = {
 
       if (!valid) {
         throw new UserInputError("Validation errors", { errors });
-      };
+      }
 
       // Allows for app to be used in social network context in the future
       let user = await User.findOne({ username });
@@ -45,28 +42,28 @@ const resolvers = {
             username: "This username is taken",
           },
         });
-      };
+      }
 
       user = await User.create(userInput);
       const token = signToken(user);
       return { token, user };
     },
-    login: async (parent, { username, password }) => {
-        const user = await User.findOne({ username });
-  
-        if (!user) {
-          throw new AuthenticationError("Invalid credentials");
-        }
-  
-        const correctPassword = await user.isCorrectPassword(password);
-        if (!correctPassword) {
-          throw new AuthenticationError("Invalid credentials");
-        }
-        const token = signToken(user);
-  
-        return { token, user };
-      },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw new AuthenticationError("Invalid credentials");
+      }
+
+      const correctPassword = await user.isCorrectPassword(password);
+      if (!correctPassword) {
+        throw new AuthenticationError("Invalid credentials");
+      }
+      const token = signToken(user);
+
+      return { token, user };
+    },
   },
 };
 
-module.exports = resolvers; 
+module.exports = resolvers;
