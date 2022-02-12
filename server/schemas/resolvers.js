@@ -57,6 +57,24 @@ const resolvers = {
       }
       throw new AuthenticationError("You must be logged in to save books.");
     },
+    deleteBook: async (parent, bookId, context) => {
+      if (conext.user) {
+        const deleteBook = await User.findOneAndUpdate(
+          {
+            _id: context.user._id,
+          },
+          {
+            $pull: { savedBooks: { bookId: bookId } },
+          }, 
+          {
+              new: true, 
+              runValidators: true, 
+          }
+        );
+        return deleteBook; 
+      }
+      throw new AuthenticationError("You must be logged in to delete books."); 
+    },
   },
 };
 
