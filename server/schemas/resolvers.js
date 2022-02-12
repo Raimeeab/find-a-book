@@ -54,27 +54,27 @@ const resolvers = {
           }
         );
         return addBook;
-      }; 
-      console.log("checking token", context.user); 
+      }
+      console.log("checking token", context.user);
       throw new AuthenticationError("You must be logged in to save books.");
     },
-    removeBook: async (parent, bookId, context) => {
-      if (conext.user) {
+    removeBook: async (parent, { bookId }, context) => {
+      if (context.user) {
         const deleteBook = await User.findOneAndUpdate(
           {
             _id: context.user._id,
           },
           {
             $pull: { savedBooks: { bookId: bookId } },
-          }, 
+          },
           {
-              new: true, 
-              runValidators: true, 
+            new: true,
+            runValidators: true,
           }
         );
-        return deleteBook; 
+        return deleteBook;
       }
-      throw new AuthenticationError("You must be logged in to delete books."); 
+      throw new AuthenticationError("You must be logged in to delete books.");
     },
   },
 };
