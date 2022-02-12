@@ -17,23 +17,25 @@ import { useMutation, useQuery } from "@apollo/client";
 const SavedBooks = () => {
   // const [userData, setUserData] = useState({});
   const { loading, data } = useQuery(GET_ME);
-  const deleteBook = useMutation(REMOVE_BOOK);
+  const [removeBook] = useMutation(REMOVE_BOOK);
 
   const userData = data?.me || {};
 
   // use this to determine if `useEffect()` hook needs to run again
-  const userDataLength = Object.keys(userData).length;
+  // const userDataLength = Object.keys(userData).length;
 
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
+    console.log("BOOK ID", bookId);
     if (!token) {
       return false;
     }
     try {
-      await deleteBook({
+      const { data } = await removeBook({
         variables: { bookId: bookId },
       });
+      console.log("reachingn variable", bookId);
       removeBookId(bookId);
     } catch (err) {
       console.error(err);
@@ -41,7 +43,7 @@ const SavedBooks = () => {
   };
 
   // if data isn't here yet, say so
-  if (!userDataLength) {
+  if (loading) {
     return <h2>LOADING...</h2>;
   }
 
@@ -49,7 +51,7 @@ const SavedBooks = () => {
     <>
       <Jumbotron fluid className="text-light bg-dark">
         <Container>
-          <h1>Viewing saved books!</h1>
+          <h1>Viewing {userData.username}'s saved books!</h1>
         </Container>
       </Jumbotron>
       <Container>
