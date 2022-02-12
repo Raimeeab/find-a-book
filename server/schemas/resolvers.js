@@ -53,9 +53,9 @@ const resolvers = {
             runValidators: true,
           }
         );
-        return addBook; 
+        return addBook;
       }
-      throw new AuthenticationError("You must be logged in to save books.")
+      throw new AuthenticationError("You must be logged in to save books.");
     },
   },
 };
